@@ -1,0 +1,10 @@
+<div class="ui secondary vertical pointing menu">
+    <a class="link item" href="{% url 'users:profile' user.pk %}" id="id_profile">
+        <i class="grey user icon"></i>
+        <span class="v-nav-title">个人资料</span>
+    </a>
+    <a class="link item" href="{% url 'users:change_password' %}" id="id_password">
+        <i class="grey edit icon"></i>
+        <span class="v-nav-title">修改密码</span>
+    </a>
+</div>
