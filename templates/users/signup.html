@@ -1,0 +1,52 @@
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+    <link href="{% static 'img/favicon.ico' %}" rel="icon" type="image/x-icon">
+    <title>注册</title>
+    <link href="https://cdn.staticfile.org/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/semantic.custom.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
+</head>
+<body id="v-account-body">
+<div class="ui middle aligned center aligned grid">
+    <div class="column v-account">
+        <h2 class="ui teal image header">
+            <img class="image" src="{% static 'img/logo.png' %}">
+            <div class="content">注册账户</div>
+        </h2>
+        <form action="{% url 'users:signup' %}" class="ui large form" enctype="multipart/form-data" method="post"
+              novalidate>
+            {% csrf_token %}
+            <div class="ui stacked segment">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        {{form.username}}
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        {{form.password1}}
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        {{form.password2}}
+                    </div>
+                </div>
+                <button class="ui fluid large teal submit button" type="submit">注册</button>
+                <p class="sixteen wide inline field v-form-field">^_^注册后在个人资料中留下邮箱接收最新资源吧^_^</p>
+            </div>
+            {% include "base/form_errors.html" %}
+        </form>
+
+        <div class="ui message">已有账号？<a href="{% url 'users:login' %}">登录</a></div>
+    </div>
+</div>
+</body>
+</html>

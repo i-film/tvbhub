@@ -1,0 +1,75 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% block content %}
+
+
+<div class="v-settings">
+    <div class="ui two column grid ">
+        <div class="four wide column">
+            {% include "base/left_nav.html" %}
+        </div>
+        <div class="twelve wide column">
+            <div class="v-settings-content">
+
+                <form action="{% url 'users:profile' form.instance.pk %}" class="ui form" enctype="multipart/form-data" method="post"
+                      novalidate role="form">
+                    {% csrf_token %}
+                    <div class="sixteen wide inline field v-form-field">
+                        <label>头像</label>
+                        <div class="v-inline-middle">
+                            <label for="id_avatar">
+                                {% thumbnail user.avatar "200x200" crop="center" as im %}
+                                <img class="ui mini circular image" src="{{ im.url }}">
+                                {% empty %}
+                                <img class="ui mini circular  image" src="{% static 'img/img_default_avatar.png' %}">
+                                {% endthumbnail %}
+                            </label>
+                            {{form.avatar}}
+                            <span class="n" id="file_is_choose">文件已选择</span>
+
+                        </div>
+                    </div>
+
+                    <div class="sixteen wide inline field v-form-field">
+                        <label>用户名</label>
+                        {{form.username}}
+                    </div>
+
+                    <div class="sixteen wide inline field v-form-field">
+                        <label>邮箱</label>
+                        {{form.email}}
+                    </div>
+
+                    <button class="ui primary button" type="submit">保存</button>
+
+                    {% include "base/form_errors.html" %}
+                    {% include "base/form_messages.html" %}
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascript %}
+<script type="text/javascript">
+
+$(function(){
+
+    $('.ui .dropdown').dropdown();
+
+    $("#id_avatar").change(function(){
+        $("#file_is_choose").show()
+    });
+
+});
+
+
+</script>
+<script src="{% static 'js/left_nav.js' %}"></script>
+{% endblock javascript %}
+

@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% load video_tag %}
+
+{% block content %}
+
+<h3 class="ui header">搜索结果</h3>
+<div class="ui unstackable items">
+
+    {% for item in video_list %}
+    <div class="item">
+        <a class="image" href="{% url 'video:detail' item.pk %}">
+                {% thumbnail item.cover "300x200" crop="center" as im %}
+                <img class="ui image" src="{{ im.url }}">
+                {% empty %}
+                {% endthumbnail %}
+                <i class="large play icon v-play-icon"></i>
+        </a>
+        <div class="content">
+            <a class="header" href="{% url 'video:detail' item.pk %}">{{ item.title }}</a>
+            <div class="meta">
+                <span class="date">发布于{{ item.create_time|time_since}}</span>
+            </div>
+            <div class="description">
+                {{ item.view_count}}次观看
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <h3>暂无数据</h3>
+    {% endfor %}
+
+</div>
+
+{% include "base/page_nav.html" %}
+
+
+{% endblock content %}
+
+{% block javascript %}
+<script  type="text/javascript" >
+$('.ui .dropdown').dropdown();
+</script>
+{% endblock javascript %}
+
