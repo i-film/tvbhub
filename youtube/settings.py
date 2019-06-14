@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'youtube.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'video',
+        'NAME': 'youtube',
         'USER': 'yc',
         'PASSWORD': 'wai25789',
         'HOST': '192.168.186.132',
