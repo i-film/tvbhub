@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'youtube',
         'USER': 'yc',
         'PASSWORD': 'wai25789',
-        'HOST': '192.168.186.132',
+        'HOST': '192.168.186.133',
         'PORT': '3306',
     }
 }
