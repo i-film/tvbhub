@@ -24,7 +24,7 @@ SECRET_KEY = '43=kmvtk-yva0_idtg**v8k0so474pt6f($ksgef&1v6d5=ynf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.186.132']
 
 # Application definition
 
@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'youtube',
         'USER': 'yc',
         'PASSWORD': 'wai25789',
-        'HOST': '192.168.186.133',
+        'HOST': '192.168.186.132',
         'PORT': '3306',
     }
 }
