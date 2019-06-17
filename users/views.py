@@ -152,7 +152,7 @@ def random_string():
 
 
 def send_email(token, email):
-    html_link = 'http://127.0.0.1:8000/users/reset_password_done/?token={}'.format(token)
+    html_link = 'http://192.168.1.111:8000/users/reset_password_done/?token={}'.format(token)
     subject = 'YouTube用户密码重设'
     html_message = '<p><a href="{}">点我</a>进行密码重设</p>'.format(html_link)
     send_html_email(subject, html_message, [email])
