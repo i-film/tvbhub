@@ -122,7 +122,11 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
+# 服务器用
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+# 本地开发用
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 AUTH_USER_MODEL = 'users.User'
 

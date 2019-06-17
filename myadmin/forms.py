@@ -7,8 +7,8 @@ from videos.models import Video, Classification
 
 
 class UserLoginForm(AuthenticationForm):
-    username = forms.CharField(min_length=4, max_length=30,
-                               error_messages={'min_length': '用户名不少于4个字符', 'max_length': '用户名不能多于30个字符',
+    username = forms.CharField(min_length=2, max_length=30,
+                               error_messages={'min_length': '用户名不少于2个字符', 'max_length': '用户名不能多于30个字符',
                                                'required': '用户名不能为空', },
                                widget=forms.TextInput(attrs={'placeholder': '请输入用户名'}))
     password = forms.CharField(min_length=8, max_length=30,
@@ -26,12 +26,12 @@ class UserLoginForm(AuthenticationForm):
 class VideoPublishForm(forms.ModelForm):
     title = forms.CharField(min_length=4, max_length=50, required=True,
                             error_messages={'min_length': '至少4个字符', 'max_length': '不能多于50个字符', 'required': '标题不能为空'},
-                            widget=forms.TextInput(attrs={'placeholder': '请输入内容'}))
+                            widget=forms.TextInput(attrs={'placeholder': '请输入标题（4～50个字符）'}))
     desc = forms.CharField(min_length=4, max_length=300, required=True,
                            error_messages={'min_length': '至少4个字符', 'max_length': '不能多于300个字符', 'required': '描述不能为空'},
-                           widget=forms.Textarea(attrs={'placeholder': '请输入内容'}))
+                           widget=forms.Textarea(attrs={'placeholder': '请输入描述（4～300个字符）'}))
     link = forms.CharField(max_length=300, required=False, error_messages={'max_length': '不能多于300个字符', },
-                           widget=forms.Textarea(attrs={'placeholder': '请输入正片链接'}))
+                           widget=forms.Textarea(attrs={'placeholder': '请输入正片链接（最多300个字符）'}))
     cover = forms.ImageField(required=True, error_messages={'required': '封面不能为空'},
                              widget=forms.FileInput(attrs={'class': 'n'}))
     status = forms.CharField(min_length=1, max_length=1, required=False, widget=forms.HiddenInput(attrs={'value': '0'}))
@@ -44,12 +44,12 @@ class VideoPublishForm(forms.ModelForm):
 class VideoEditForm(forms.ModelForm):
     title = forms.CharField(min_length=4, max_length=50, required=True,
                             error_messages={'min_length': '至少4个字符', 'max_length': '不能多于50个字符', 'required': '标题不能为空'},
-                            widget=forms.TextInput(attrs={'placeholder': '请输入内容'}))
+                            widget=forms.TextInput(attrs={'placeholder': '请输入标题（4～50个字符）'}))
     desc = forms.CharField(min_length=4, max_length=300, required=True,
                            error_messages={'min_length': '至少4个字符', 'max_length': '不能多于300个字符', 'required': '描述不能为空'},
-                           widget=forms.Textarea(attrs={'placeholder': '请输入内容'}))
+                           widget=forms.Textarea(attrs={'placeholder': '请输入描述（4～300个字符）'}))
     link = forms.CharField(max_length=300, required=False, error_messages={'max_length': '不能多于300个字符', },
-                           widget=forms.Textarea(attrs={'placeholder': '下载或者观看链接'}))
+                           widget=forms.Textarea(attrs={'placeholder': '请输入正片链接（最多300个字符）'}))
     cover = forms.ImageField(required=True, error_messages={'required': '封面不能为空'},
                              widget=forms.FileInput(attrs={'class': 'n'}))
     status = forms.CharField(min_length=1, max_length=1, required=False, widget=forms.HiddenInput())
