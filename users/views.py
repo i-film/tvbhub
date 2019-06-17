@@ -104,7 +104,7 @@ class LikeListView(generic.ListView):
 
     def get_queryset(self):
         user = get_object_or_404(User, pk=self.kwargs.get('pk'))
-        videos = user.liked_videos.all()
+        videos = user.liked_videos.all().order_by('pk')
         return videos
 
 
