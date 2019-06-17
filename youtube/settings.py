@@ -24,7 +24,7 @@ SECRET_KEY = '43=kmvtk-yva0_idtg**v8k0so474pt6f($ksgef&1v6d5=ynf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.186.132']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -122,9 +122,7 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 AUTH_USER_MODEL = 'users.User'
 
