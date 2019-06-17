@@ -122,7 +122,11 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
+# comment this on local
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+# uncommet this on local
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 AUTH_USER_MODEL = 'users.User'
 
