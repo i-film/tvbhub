@@ -59,7 +59,7 @@ class ChangePwdForm(PasswordChangeForm):
 
 
 class ResetPwdForm(PasswordResetForm):
-    username = forms.CharField(min_length=1, max_length=30, required=False,
+    username = forms.CharField(min_length=4, max_length=30, required=False,
                                error_messages={'min_length': '用户名至少4个字符', 'max_length': '用户名不能多于30个字符', },
                                widget=forms.TextInput())
     email = forms.EmailField(required=False, error_messages={'invalid': '请输入有效的Email地址', }, widget=forms.EmailInput())
@@ -67,7 +67,7 @@ class ResetPwdForm(PasswordResetForm):
 
 
 class ProfileForm(forms.ModelForm):
-    username = forms.CharField(min_length=1, max_length=30, required=False,
+    username = forms.CharField(min_length=4, max_length=30, required=False,
                                error_messages={'min_length': '用户名至少4个字符', 'max_length': '用户名不能多于30个字符', },
                                widget=forms.TextInput())
     avatar = forms.ImageField(required=False, validators=[avatar_file_size],
