@@ -51,6 +51,7 @@ class IndexView(AdminUserRequiredMixin, generic.View):
 
     def get(self, request):
         video_count = Video.objects.get_count()
+        video_today_count = Video.objects.get_today_count()
         video_has_published_count = Video.objects.get_published_count()
         video_not_published_count = Video.objects.get_not_published_count()
         user_count = User.objects.count()
@@ -59,6 +60,7 @@ class IndexView(AdminUserRequiredMixin, generic.View):
         comment_today_count = Comment.objects.get_today_count()
         data = {
             'video_count': video_count,
+            'video_today_count': video_today_count,
             'video_has_published_count': video_has_published_count,
             'video_not_published_count': video_not_published_count,
             'user_count': user_count,
@@ -159,6 +161,23 @@ class VideoListView(AdminUserRequiredMixin, generic.ListView):
         return Video.objects.get_search_list(self.q)
 
 
+class VideoListViewToday(VideoListView):
+    def get_queryset(self):
+        now = datetime.datetime.now()
+        start_time = now - datetime.timedelta(hours=23, minutes=59, seconds=59)
+        return Video.objects.filter(create_time__gt=start_time).order_by('-create_time')
+
+
+class VideoListViewNoPublish(VideoListView):
+    def get_queryset(self):
+        return Video.objects.filter(status='1').order_by('-create_time')
+
+
+class VideoListViewPublishing(VideoListView):
+    def get_queryset(self):
+        return Video.objects.filter(status='0').order_by('-create_time')
+
+
 class ClassificationListView(AdminUserRequiredMixin, generic.ListView):
     model = Classification
     template_name = 'myadmin/classification_list.html'
@@ -235,6 +254,13 @@ class UserListView(AdminUserRequiredMixin, generic.ListView):
         return User.objects.filter(username__contains=self.q).order_by('-date_joined')
 
 
+class UserListViewToday(UserListView):
+    def get_queryset(self):
+        now = datetime.datetime.now()
+        start_time = now - datetime.timedelta(hours=23, minutes=59, seconds=59)
+        return User.objects.filter(date_joined__gt=start_time).order_by('-date_joined')
+
+
 class UserAddView(SuperUserRequiredMixin, generic.View):
     def get(self, request):
         form = UserAddForm()
@@ -293,6 +319,13 @@ class CommentListView(AdminUserRequiredMixin, generic.ListView):
     def get_queryset(self):
         self.q = self.request.GET.get('q', '')
         return Comment.objects.filter(content__contains=self.q).order_by('-timestamp')
+
+
+class CommentListViewToday(CommentListView):
+    def get_queryset(self):
+        now = datetime.datetime.now()
+        start_time = now - datetime.timedelta(hours=23, minutes=59, seconds=59)
+        return Comment.objects.filter(timestamp__gt=start_time).order_by('-timestamp')
 
 
 @ajax_required

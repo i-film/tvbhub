@@ -1,3 +1,4 @@
+import datetime
 import os
 
 from django.conf import settings
@@ -8,6 +9,9 @@ from django.dispatch import receiver
 class VideoQuerySet(models.query.QuerySet):
     def get_count(self):
         return self.count()
+
+    def get_today_count(self):
+        return self.exclude(create_time__lt=datetime.date.today()).count()
 
     def get_published_count(self):
         return self.filter(status=0).count()
