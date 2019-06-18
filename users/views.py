@@ -136,7 +136,7 @@ def reset_password(request):
 
 def reset_password_done(request):
     token = request.GET.get('token', None)
-    if len(token) < 10:
+    if token is None or len(token) < 10:
         messages.error(request, '无效的请求')
         return render(request, 'users/reset_error.html')
     try:
