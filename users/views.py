@@ -136,6 +136,9 @@ def reset_password(request):
 
 def reset_password_done(request):
     token = request.GET.get('token', None)
+    if len(token) < 10:
+        messages.error(request, '无效的请求')
+        return render(request, 'users/reset_error.html')
     try:
         user = User.objects.get(first_name=token[:10], last_name=token[10:])
         if user is not None:
@@ -145,7 +148,7 @@ def reset_password_done(request):
             messages.info(request, '新密码：{}'.format(random_password))
             return render(request, 'users/reset_password_done.html')
     except User.DoesNotExist:
-        messages.error(request, '用户名和邮箱地址不匹配')
+        messages.error(request, '无效的请求')
         return render(request, 'users/reset_error.html')
 
 
