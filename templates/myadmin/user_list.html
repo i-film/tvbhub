@@ -17,12 +17,13 @@
     <div class="row">
         <table class="ui unstackable single line striped selectable table">
             <thead>
-            <tr><th>用户名</th><th>账号类型</th><th>加入时间</th><th>操作</th></tr>
+            <tr><th>用户ID</th><th>用户名</th><th>账号类型</th><th>加入时间</th><th>操作</th></tr>
             </thead>
             <tbody class="video-list">
 
             {% for item in user_list %}
             <tr user-id="{{item.id}}">
+                <td> {{item.id}}</td>
                 <td> {{item.username}}</td>
                 <td> {% if item.is_staff %}管理员{% else %}普通{% endif %}</td>
                 <td> {{item.date_joined|date:'Y-m-d H:i'}}</td>

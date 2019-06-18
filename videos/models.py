@@ -25,7 +25,7 @@ class VideoQuerySet(models.query.QuerySet):
             return self.order_by('-create_time')
 
     def get_recommend_list(self):
-        return self.filter(status=0).order_by('-view_count')[:4]
+        return self.filter(status=0).order_by('-view_count')[:3]  # 推荐前3条观看最多的视频
 
 
 class Classification(models.Model):

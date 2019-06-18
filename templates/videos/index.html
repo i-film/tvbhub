@@ -17,7 +17,7 @@
     {% for item in video_list %}
     <div class="four wide column">
         <div class="ui card">
-            <a class="image" href="{% url 'video:detail' item.pk %}">
+            <a class="image" href="{% url 'videos:detail' item.pk %}">
                 {% thumbnail item.cover "300x200" crop="center" as im %}
                 <img class="ui image" src="{{ im.url }}">
                 {% empty %}
@@ -25,7 +25,7 @@
                 <i class="large play icon v-play-icon"></i>
             </a>
             <div class="content">
-                <a class="header" href="{% url 'video:detail' item.pk %}">{{ item.title }}</a>
+                <a class="header" href="{% url 'videos:detail' item.pk %}">{{ item.title }}</a>
                 <div class="meta">
                     <span class="date">发布于{{ item.create_time|time_since}}</span>
                 </div>

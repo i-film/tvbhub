@@ -24,5 +24,6 @@ urlpatterns = [
     path('myadmin/', include('myadmin.urls')),
     path('users/', include('users.urls')),
     path('videos/', include('videos.urls')),
+    path('comments/',include('comments.urls')),
     path('', views.IndexView.as_view(), name='home'),  # 默认首页
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

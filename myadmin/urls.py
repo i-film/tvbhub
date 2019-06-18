@@ -33,4 +33,8 @@ urlpatterns = [
     path('user_list/', views.UserListView.as_view(), name='user_list'),
     path('user_edit/<int:pk>', views.UserEditView.as_view(), name='user_edit'),
     path('user_delete/', views.user_delete, name='user_delete'),
+
+    # 评论管理
+    path('comment_list/', views.CommentListView.as_view(), name='comment_list'),
+    path('comment_delete/', views.comment_delete, name='comment_delete'),
 ]

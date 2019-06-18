@@ -11,6 +11,7 @@ from django.views.decorators.http import require_http_methods
 from django.views.generic import TemplateView
 
 from helpers import get_page_list, AdminUserRequiredMixin, ajax_required, SuperUserRequiredMixin
+from comments.models import Comment
 from users.models import User
 from videos.models import Video, Classification
 from .forms import UserLoginForm, VideoPublishForm, VideoEditForm, UserAddForm, UserEditForm, ClassificationAddForm, \
@@ -54,12 +55,16 @@ class IndexView(AdminUserRequiredMixin, generic.View):
         video_not_published_count = Video.objects.get_not_published_count()
         user_count = User.objects.count()
         user_today_count = User.objects.exclude(date_joined__lt=datetime.date.today()).count()
+        comment_count = Comment.objects.get_count()
+        comment_today_count = Comment.objects.get_today_count()
         data = {
             'video_count': video_count,
             'video_has_published_count': video_has_published_count,
             'video_not_published_count': video_not_published_count,
             'user_count': user_count,
             'user_today_count': user_today_count,
+            'comment_count': comment_count,
+            'comment_today_count': comment_today_count
         }
         return render(self.request, 'myadmin/index.html', data)
 
@@ -265,5 +270,37 @@ def user_delete(request):
     instance = User.objects.get(id=user_id)
     if instance.is_superuser:
         return JsonResponse({'code': 1, 'msg': '不能删除管理员'})
+    instance.delete()
+    return JsonResponse({'code': 0, 'msg': 'success'})
+
+
+class CommentListView(AdminUserRequiredMixin, generic.ListView):
+    model = Comment
+    template_name = 'myadmin/comment_list.html'
+    context_object_name = 'comment_list'
+    paginate_by = 10
+    q = ''
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(CommentListView, self).get_context_data(**kwargs)
+        paginator = context.get('paginator')
+        page = context.get('page_obj')
+        page_list = get_page_list(paginator, page)
+        context['page_list'] = page_list
+        context['q'] = self.q
+        return context
+
+    def get_queryset(self):
+        self.q = self.request.GET.get('q', '')
+        return Comment.objects.filter(content__contains=self.q).order_by('-timestamp')
+
+
+@ajax_required
+@require_http_methods(['POST'])
+def comment_delete(request):
+    if not request.user.is_superuser:
+        return JsonResponse({'code': 1, 'msg': '无删除权限'})
+    comment_id = request.POST['comment_id']
+    instance = Comment.objects.get(id=comment_id)
     instance.delete()
     return JsonResponse({'code': 0, 'msg': 'success'})

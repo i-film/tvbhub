@@ -36,6 +36,34 @@ $(function () {
             }
         });
     });
+
+    // 提交评论
+    var frm = $('#comment_form')
+    frm.submit(function () {
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            dataType:'json',
+            data: frm.serialize(),
+            success: function (data) {
+                var code = data.code
+                var msg = data.msg
+                if(code == 0){
+                    $('#id_content').val("")
+                    $('.comment-list').prepend(data.html);
+                    $('#comment-result').text("评论成功")
+                    $('.info').show().delay(2000).fadeOut(800)
+                }else{
+                    $('#comment-result').text(msg)
+                    $('.info').show().delay(2000).fadeOut(800);
+                }
+            },
+            error: function(data) {
+            }
+        });
+        return false;
+    });
+
 })
 
 

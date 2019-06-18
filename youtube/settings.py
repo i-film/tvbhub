@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'chunked_upload',
     'users',
     'videos',
+    'comments',
     'myadmin',
 ]
 
