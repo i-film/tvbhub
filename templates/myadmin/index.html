@@ -22,15 +22,27 @@
                 </div>
                 <div class="statistic">
                     <div class="value">{{ video_today_count }}</div>
-                    <div class="label"><a href="{% url 'myadmin:video_today' %}">今日新增</a></div>
+                    {% if video_today_count > 0 %}
+                        <div class="label"><a href="{% url 'myadmin:video_today' %}">今日新增</a></div>
+                    {% else %}
+                        <div class="label">今日新增</div>
+                    {% endif %}
                 </div>
                 <div class="statistic">
                     <div class="value">{{ video_has_published_count }}</div>
-                    <div class="label"><a href="{% url 'myadmin:video_publishing' %}">发布中</a></div>
+                    {% if video_has_published_count > 0 %}
+                        <div class="label"><a href="{% url 'myadmin:video_publishing' %}">发布中</a></div>
+                    {% else %}
+                        <div class="label">发布中</div>
+                    {% endif %}
                 </div>
                 <div class="statistic">
                     <div class="value">{{ video_not_published_count }}</div>
-                    <div class="label"><a href="{% url 'myadmin:video_nopublish' %}">未发布</a></div>
+                    {% if video_not_published_count > 0 %}
+                        <div class="label"><a href="{% url 'myadmin:video_nopublish' %}">未发布</a></div>
+                    {% else %}
+                        <div class="label">未发布</div>
+                    {% endif %}
                 </div>
             </div>
 
@@ -45,7 +57,11 @@
                 </div>
                 <div class="statistic">
                     <div class="value">{{ user_today_count }}</div>
-                    <div class="label"><a href="{% url 'myadmin:user_today' %}">今日新增</a></div>
+                    {% if user_today_count > 0 %}
+                        <div class="label"><a href="{% url 'myadmin:user_today' %}">今日新增</a></div>
+                    {% else %}
+                        <div class="label">今日新增</div>
+                    {% endif %}
                 </div>
             </div>
 
@@ -60,7 +76,11 @@
                 </div>
                 <div class="statistic">
                     <div class="value">{{ comment_today_count }}</div>
-                    <div class="label"><a href="{% url 'myadmin:comment_today' %}">今日新增</a></div>
+                    {% if comment_today_count > 0 %}
+                        <div class="label"><a href="{% url 'myadmin:comment_today' %}">今日新增</a></div>
+                    {% else %}
+                        <div class="label">今日新增</div>
+                    {% endif %}
                 </div>
             </div>
 
