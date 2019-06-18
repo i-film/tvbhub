@@ -10,8 +10,8 @@ from django.views import generic
 from django.views.decorators.http import require_http_methods
 from django.views.generic import TemplateView
 
-from helpers import get_page_list, AdminUserRequiredMixin, ajax_required, SuperUserRequiredMixin
 from comments.models import Comment
+from helpers import get_page_list, AdminUserRequiredMixin, ajax_required, SuperUserRequiredMixin
 from users.models import User
 from videos.models import Video, Classification
 from .forms import UserLoginForm, VideoPublishForm, VideoEditForm, UserAddForm, UserEditForm, ClassificationAddForm, \
