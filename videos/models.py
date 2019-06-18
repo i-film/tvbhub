@@ -1,3 +1,4 @@
+import datetime
 import os
 
 from django.conf import settings
@@ -8,6 +9,9 @@ from django.dispatch import receiver
 class VideoQuerySet(models.query.QuerySet):
     def get_count(self):
         return self.count()
+
+    def get_today_count(self):
+        return self.exclude(create_time__lt=datetime.date.today()).count()
 
     def get_published_count(self):
         return self.filter(status=0).count()
@@ -25,7 +29,7 @@ class VideoQuerySet(models.query.QuerySet):
             return self.order_by('-create_time')
 
     def get_recommend_list(self):
-        return self.filter(status=0).order_by('-view_count')[:4]
+        return self.filter(status=0).order_by('-view_count')[:3]  # 推荐前3条观看最多的视频
 
 
 class Classification(models.Model):
@@ -55,7 +59,7 @@ class Video(models.Model):
         ('1', '未发布'),
     )
     title = models.CharField(max_length=50, blank=True, null=True)
-    desc = models.CharField(max_length=300, blank=True, null=True)
+    desc = models.CharField(max_length=100, blank=True, null=True)
     classification = models.ForeignKey(Classification, on_delete=models.CASCADE, null=True)
     file = models.FileField(max_length=256)
     cover = models.ImageField(upload_to='cover/', blank=True, null=True)
@@ -63,7 +67,6 @@ class Video(models.Model):
     view_count = models.IntegerField(default=0, blank=True)
     liked = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='liked_videos')  # 喜欢的用户
     create_time = models.DateTimeField(auto_now_add=True, blank=True, max_length=20)
-    link = models.CharField(max_length=300, blank=True, null=True)
 
     objects = VideoQuerySet.as_manager()
 

@@ -10,6 +10,7 @@ from django.views import generic
 from django.views.decorators.http import require_http_methods
 from django.views.generic import TemplateView
 
+from comments.models import Comment
 from helpers import get_page_list, AdminUserRequiredMixin, ajax_required, SuperUserRequiredMixin
 from users.models import User
 from videos.models import Video, Classification
@@ -50,16 +51,22 @@ class IndexView(AdminUserRequiredMixin, generic.View):
 
     def get(self, request):
         video_count = Video.objects.get_count()
+        video_today_count = Video.objects.get_today_count()
         video_has_published_count = Video.objects.get_published_count()
         video_not_published_count = Video.objects.get_not_published_count()
         user_count = User.objects.count()
         user_today_count = User.objects.exclude(date_joined__lt=datetime.date.today()).count()
+        comment_count = Comment.objects.get_count()
+        comment_today_count = Comment.objects.get_today_count()
         data = {
             'video_count': video_count,
+            'video_today_count': video_today_count,
             'video_has_published_count': video_has_published_count,
             'video_not_published_count': video_not_published_count,
             'user_count': user_count,
             'user_today_count': user_today_count,
+            'comment_count': comment_count,
+            'comment_today_count': comment_today_count
         }
         return render(self.request, 'myadmin/index.html', data)
 
@@ -154,6 +161,23 @@ class VideoListView(AdminUserRequiredMixin, generic.ListView):
         return Video.objects.get_search_list(self.q)
 
 
+class VideoListViewToday(VideoListView):
+    def get_queryset(self):
+        now = datetime.datetime.now()
+        start_time = now - datetime.timedelta(hours=23, minutes=59, seconds=59)
+        return Video.objects.filter(create_time__gt=start_time).order_by('-create_time')
+
+
+class VideoListViewNoPublish(VideoListView):
+    def get_queryset(self):
+        return Video.objects.filter(status='1').order_by('-create_time')
+
+
+class VideoListViewPublishing(VideoListView):
+    def get_queryset(self):
+        return Video.objects.filter(status='0').order_by('-create_time')
+
+
 class ClassificationListView(AdminUserRequiredMixin, generic.ListView):
     model = Classification
     template_name = 'myadmin/classification_list.html'
@@ -230,6 +254,13 @@ class UserListView(AdminUserRequiredMixin, generic.ListView):
         return User.objects.filter(username__contains=self.q).order_by('-date_joined')
 
 
+class UserListViewToday(UserListView):
+    def get_queryset(self):
+        now = datetime.datetime.now()
+        start_time = now - datetime.timedelta(hours=23, minutes=59, seconds=59)
+        return User.objects.filter(date_joined__gt=start_time).order_by('-date_joined')
+
+
 class UserAddView(SuperUserRequiredMixin, generic.View):
     def get(self, request):
         form = UserAddForm()
@@ -265,5 +296,44 @@ def user_delete(request):
     instance = User.objects.get(id=user_id)
     if instance.is_superuser:
         return JsonResponse({'code': 1, 'msg': '不能删除管理员'})
+    instance.delete()
+    return JsonResponse({'code': 0, 'msg': 'success'})
+
+
+class CommentListView(AdminUserRequiredMixin, generic.ListView):
+    model = Comment
+    template_name = 'myadmin/comment_list.html'
+    context_object_name = 'comment_list'
+    paginate_by = 10
+    q = ''
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(CommentListView, self).get_context_data(**kwargs)
+        paginator = context.get('paginator')
+        page = context.get('page_obj')
+        page_list = get_page_list(paginator, page)
+        context['page_list'] = page_list
+        context['q'] = self.q
+        return context
+
+    def get_queryset(self):
+        self.q = self.request.GET.get('q', '')
+        return Comment.objects.filter(content__contains=self.q).order_by('-timestamp')
+
+
+class CommentListViewToday(CommentListView):
+    def get_queryset(self):
+        now = datetime.datetime.now()
+        start_time = now - datetime.timedelta(hours=23, minutes=59, seconds=59)
+        return Comment.objects.filter(timestamp__gt=start_time).order_by('-timestamp')
+
+
+@ajax_required
+@require_http_methods(['POST'])
+def comment_delete(request):
+    if not request.user.is_superuser:
+        return JsonResponse({'code': 1, 'msg': '无删除权限'})
+    comment_id = request.POST['comment_id']
+    instance = Comment.objects.get(id=comment_id)
     instance.delete()
     return JsonResponse({'code': 0, 'msg': 'success'})

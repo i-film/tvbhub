@@ -6,7 +6,7 @@
     {% for item in recommend_list %}
     <div class="item">
         <div class="ui tiny image">
-            <a class="image" href="{% url 'video:detail' item.pk %}">
+            <a class="image" href="{% url 'videos:detail' item.pk %}">
                 {% thumbnail item.cover "300x200" crop="center" as im %}
                 <img class="ui image" src="{{ im.url }}">
                 {% empty %}
@@ -15,7 +15,7 @@
             </a>
         </div>
         <div class="middle aligned content">
-            <a class=" header-title" href="{% url 'video:detail' item.pk %}">{{ item.title }}</a>
+            <a class=" header-title" href="{% url 'videos:detail' item.pk %}">{{ item.title }}</a>
             <div class="meta">
                 <span class="description">{{ item.view_count }}次观看</span>
             </div>

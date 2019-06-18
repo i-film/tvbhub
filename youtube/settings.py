@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'chunked_upload',
     'users',
     'videos',
+    'comments',
     'myadmin',
 ]
 
@@ -138,14 +139,14 @@ LOGIN_REDIRECT_URL = '/videos/index'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'upload').replace('\\', '/')
 MEDIA_URL = '/upload/'
 
-# 上传视频最大尺寸
+# 上传视频最大尺寸 100MB
 CHUNKED_UPLOAD_MAX_BYTES = 100000000
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # 邮件配置
 EMAIL_USE_SSL = True
-EMAIL_HOST = 'smtp.163.com'
+EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'ahyinchen@163.com'
-EMAIL_HOST_PASSWORD = 'qaz1346610660'
+EMAIL_HOST_USER = 'passlinemovie@foxmail.com'
+EMAIL_HOST_PASSWORD = 'fwbmthnwxehxebcd'

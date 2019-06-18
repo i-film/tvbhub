@@ -18,15 +18,31 @@
             <div class="ui tiny statistics">
                 <div class="statistic">
                     <div class="value">{{ video_count }}</div>
-                    <div class="label">视频数</div>
+                    <div class="label">总视频数</div>
+                </div>
+                <div class="statistic">
+                    <div class="value">{{ video_today_count }}</div>
+                    {% if video_today_count > 0 %}
+                        <div class="label"><a href="{% url 'myadmin:video_today' %}">今日新增</a></div>
+                    {% else %}
+                        <div class="label">今日新增</div>
+                    {% endif %}
                 </div>
                 <div class="statistic">
                     <div class="value">{{ video_has_published_count }}</div>
-                    <div class="label">发布中</div>
+                    {% if video_has_published_count > 0 %}
+                        <div class="label"><a href="{% url 'myadmin:video_publishing' %}">发布中</a></div>
+                    {% else %}
+                        <div class="label">发布中</div>
+                    {% endif %}
                 </div>
                 <div class="statistic">
                     <div class="value">{{ video_not_published_count }}</div>
-                    <div class="label">未发布</div>
+                    {% if video_not_published_count > 0 %}
+                        <div class="label"><a href="{% url 'myadmin:video_nopublish' %}">未发布</a></div>
+                    {% else %}
+                        <div class="label">未发布</div>
+                    {% endif %}
                 </div>
             </div>
 
@@ -37,14 +53,36 @@
             <div class="ui tiny statistics">
                 <div class="statistic">
                     <div class="value">{{ user_count }}</div>
-                    <div class="label"> 用户数</div>
+                    <div class="label">总用户数</div>
                 </div>
                 <div class="statistic">
                     <div class="value">{{ user_today_count }}</div>
-                    <div class="label">今日新增</div>
+                    {% if user_today_count > 0 %}
+                        <div class="label"><a href="{% url 'myadmin:user_today' %}">今日新增</a></div>
+                    {% else %}
+                        <div class="label">今日新增</div>
+                    {% endif %}
                 </div>
             </div>
 
+            <div class="ui hidden divider"></div>
+            <div class="ui hidden divider"></div>
+            <div class="ui hidden divider"></div>
+
+            <div class="ui tiny statistics">
+                <div class="statistic">
+                    <div class="value">{{ comment_count }}</div>
+                    <div class="label">总评论数</div>
+                </div>
+                <div class="statistic">
+                    <div class="value">{{ comment_today_count }}</div>
+                    {% if comment_today_count > 0 %}
+                        <div class="label"><a href="{% url 'myadmin:comment_today' %}">今日新增</a></div>
+                    {% else %}
+                        <div class="label">今日新增</div>
+                    {% endif %}
+                </div>
+            </div>
 
             <div class="ui hidden divider"></div>
             <div class="ui hidden divider"></div>

@@ -2,8 +2,9 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views import generic
 from django.views.decorators.http import require_http_methods
-from helpers import get_page_list, ajax_required
 
+from helpers import get_page_list, ajax_required
+from .forms import CommentForm
 from .models import Video, Classification
 
 
@@ -67,6 +68,8 @@ class VideoDetailView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(VideoDetailView, self).get_context_data(**kwargs)
         recommend_list = Video.objects.get_recommend_list()
+        form = CommentForm()
+        context['form'] = form
         context['recommend_list'] = recommend_list
         return context
 
