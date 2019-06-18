@@ -13,12 +13,7 @@
         </video>
         <div class="video-info">
             <div class="video-title">{{ video.title }}</div>
-            <div class="video-view-count">
-                {{ video.view_count }}次观看
-                {% if video.link %}
-                    <a target="_blank" href="{{ video.link }}">获取正片</a>
-                {% endif %}
-            </div>
+            <div class="video-view-count">{{ video.view_count }}次观看</div>
             <div class="video-view-operation">{{video.desc}}</div>
             <div class="extra content video-view-operation">
                 <span class="left floated like">

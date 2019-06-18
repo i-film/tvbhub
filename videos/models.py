@@ -55,7 +55,7 @@ class Video(models.Model):
         ('1', '未发布'),
     )
     title = models.CharField(max_length=50, blank=True, null=True)
-    desc = models.CharField(max_length=300, blank=True, null=True)
+    desc = models.CharField(max_length=100, blank=True, null=True)
     classification = models.ForeignKey(Classification, on_delete=models.CASCADE, null=True)
     file = models.FileField(max_length=256)
     cover = models.ImageField(upload_to='cover/', blank=True, null=True)
@@ -63,7 +63,6 @@ class Video(models.Model):
     view_count = models.IntegerField(default=0, blank=True)
     liked = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='liked_videos')  # 喜欢的用户
     create_time = models.DateTimeField(auto_now_add=True, blank=True, max_length=20)
-    link = models.CharField(max_length=300, blank=True, null=True)
 
     objects = VideoQuerySet.as_manager()
 
