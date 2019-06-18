@@ -6,10 +6,12 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.mail import send_mail
 from django.shortcuts import redirect, render, reverse, get_object_or_404
 from django.views import generic
 
-from helpers import AuthorRequiredMixin, get_page_list, send_html_email
+from helpers import AuthorRequiredMixin, get_page_list
+from youtube.settings import ALLOWED_HOSTS, EMAIL_HOST_USER
 from .forms import ProfileForm, SignUpForm, UserLoginForm, ChangePwdForm, ResetPwdForm
 
 User = get_user_model()
@@ -152,7 +154,11 @@ def random_string():
 
 
 def send_email(token, email):
-    html_link = 'http://192.168.1.111:80/users/reset_password_done/?token={}'.format(token)
-    subject = 'YouTube用户密码重设'
+    host = '127.0.0.1:8000'
+    if len(ALLOWED_HOSTS) > 0:
+        host = ALLOWED_HOSTS[0]
+    html_link = 'http://{0}/users/reset_password_done/?token={1}'.format(host, token)
+    subject = 'PassLineMovie用户密码重设'
+    message = '如果这不是您本人的操作，请忽略此邮件'
     html_message = '<p><a href="{}">点我</a>进行密码重设</p>'.format(html_link)
-    send_html_email(subject, html_message, [email])
+    send_mail(subject, message, EMAIL_HOST_USER, [email], html_message=html_message)

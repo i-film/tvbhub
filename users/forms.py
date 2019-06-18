@@ -63,7 +63,6 @@ class ResetPwdForm(PasswordResetForm):
                                error_messages={'min_length': '用户名至少2个字符', 'max_length': '用户名不能多于30个字符', },
                                widget=forms.TextInput())
     email = forms.EmailField(required=False, error_messages={'invalid': '请输入有效的Email地址', }, widget=forms.EmailInput())
-    # token = forms.CharField(error_messages={'required': '验证码不能为空', }, widget=forms.NumberInput())
 
 
 class ProfileForm(forms.ModelForm):

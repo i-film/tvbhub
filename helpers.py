@@ -1,11 +1,6 @@
-import smtplib
-
-from django.conf import settings
 from django.core.exceptions import PermissionDenied
-from django.core.mail import send_mass_mail, send_mail
 from django.http import HttpResponseBadRequest
 from django.shortcuts import *
-from django.utils.html import strip_tags
 from django.views.generic import View
 
 
@@ -51,34 +46,6 @@ def ajax_required(f):
     wrap.__doc__ = f.__doc__
     wrap.__name__ = f.__name__
     return wrap
-
-
-def send_html_email(subject, html_message, to_list):
-    plain_message = strip_tags(html_message)
-    from_email = settings.EMAIL_HOST_USER
-    send_mail(subject, plain_message, from_email, to_list, html_message=html_message)
-
-
-def send_email(subject, content, to_list):
-    """
-    Example:
-    subject = 'test subject'
-    content = 'hello, this is content'
-    to_list = ['abc@qq.com','abcd@163.com']
-    send_email(subject, content, to_list)
-
-    """
-    try:
-        message = (subject, content, settings.EMAIL_HOST_USER, to_list)
-        # do not forget set password
-        print("--> is sending email")
-        send_mass_mail((message,))
-    except smtplib.SMTPException:
-        print("--> send fail")
-        return HttpResponse("fail")
-    else:
-        print("--> send success")
-        return HttpResponse("success")
 
 
 class AuthorRequiredMixin(View):
