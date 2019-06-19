@@ -36,7 +36,7 @@ function calculate_md5(file, chunk_size) {
 $("#chunked_upload").fileupload({
   url: api_chunked_uplad,
   dataType: "json",
-  maxChunkSize: 100000, // Chunks of 100 kB
+  maxChunkSize: 10000000, // Chunks of 100 kB
   formData: form_data,
   add: function(e, data) { // Called before starting upload
     var fileSize = data.originalFiles[0]['size'];
@@ -44,8 +44,8 @@ $("#chunked_upload").fileupload({
     console.log('file size --> ' + fileSize);
     console.log('type --> ' + type);
 
-    if(fileSize > 100000000){
-        alert('文件太大了，请上传100M以内的文件');
+    if(fileSize > 10000000000){
+        alert('文件太大了，请上传10GB以内的文件');
         return;
     }
 
@@ -57,7 +57,7 @@ $("#chunked_upload").fileupload({
     // If this is the second file you're uploading we need to remove the
     // old upload_id and just keep the csrftoken (which is always first).
     form_data.splice(1);
-    calculate_md5(data.files[0], 100000);  // Again, chunks of 100 kB
+    calculate_md5(data.files[0], 10000000);  // Again, chunks of 100 kB
     data.submit();
 
     $('#progress_label').on('click', false);
@@ -65,7 +65,7 @@ $("#chunked_upload").fileupload({
 
   },
   chunkdone: function (e, data) { // Called after uploading each chunk
-    if (form_data.length < 2) {
+    if (form_data.length < 10) {
       form_data.push(
         {"name": "upload_id", "value": data.result.upload_id}
       );
