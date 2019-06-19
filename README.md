@@ -217,4 +217,5 @@ Centos7 中使用 `conda install mysqlcient`
 在本地开发要改一下126~130行
 
 如果要更改上传视频的大小限制需要在 settings 的143行和  
-myadmin/video_upload.js 的 39, 47, 60 行更改
+myadmin/video_upload.js 的 39, 47, 60 行和  
+youtube_nginx.conf 的 25 行更改
