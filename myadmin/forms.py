@@ -7,14 +7,14 @@ from videos.models import Video, Classification
 
 
 class UserLoginForm(AuthenticationForm):
-    username = forms.CharField(min_length=2, max_length=30,
-                               error_messages={'min_length': '用户名不少于2个字符', 'max_length': '用户名不能多于30个字符',
+    username = forms.CharField(min_length=2, max_length=15,
+                               error_messages={'min_length': '用户名至少2个字', 'max_length': '用户名不能多于15个字',
                                                'required': '用户名不能为空', },
-                               widget=forms.TextInput(attrs={'placeholder': '请输入用户名'}))
-    password = forms.CharField(min_length=8, max_length=30,
-                               error_messages={'min_length': '密码不少于8个字符', 'max_length': '密码不能多于30个字符',
+                               widget=forms.TextInput(attrs={'placeholder': '请输入用户名（2～15个字）'}))
+    password = forms.CharField(min_length=8, max_length=16,
+                               error_messages={'min_length': '密码不少于8位', 'max_length': '密码不能多于16位',
                                                'required': '密码不能为空', },
-                               widget=forms.PasswordInput(attrs={'placeholder': '请输入密码'}))
+                               widget=forms.PasswordInput(attrs={'placeholder': '请输入密码（最少8位）'}))
 
     class Meta:
         model = User
@@ -24,12 +24,12 @@ class UserLoginForm(AuthenticationForm):
 
 
 class VideoPublishForm(forms.ModelForm):
-    title = forms.CharField(min_length=4, max_length=50, required=True,
-                            error_messages={'min_length': '至少4个字符', 'max_length': '不能多于50个字符', 'required': '标题不能为空'},
-                            widget=forms.TextInput(attrs={'placeholder': '请输入标题（4～50个字符）'}))
-    desc = forms.CharField(min_length=4, max_length=100, required=True,
-                           error_messages={'min_length': '至少4个字符', 'max_length': '不能多于100个字符', 'required': '描述不能为空'},
-                           widget=forms.Textarea(attrs={'placeholder': '请输入描述（4～100个字符）'}))
+    title = forms.CharField(min_length=2, max_length=15, required=True,
+                            error_messages={'min_length': '标题至少2个字', 'max_length': '标题不能多于15个字', 'required': '标题不能为空'},
+                            widget=forms.TextInput(attrs={'placeholder': '请输入标题（2～15个字）'}))
+    desc = forms.CharField(min_length=2, max_length=50, required=True,
+                           error_messages={'min_length': '描述至少2个字', 'max_length': '描述不能多于50个字', 'required': '描述不能为空'},
+                           widget=forms.Textarea(attrs={'placeholder': '请输入描述（2～50个字）'}))
     cover = forms.ImageField(required=True, error_messages={'required': '封面不能为空'},
                              widget=forms.FileInput(attrs={'class': 'n'}))
     status = forms.CharField(min_length=1, max_length=1, required=False, widget=forms.HiddenInput(attrs={'value': '0'}))
@@ -40,12 +40,12 @@ class VideoPublishForm(forms.ModelForm):
 
 
 class VideoEditForm(forms.ModelForm):
-    title = forms.CharField(min_length=4, max_length=50, required=True,
-                            error_messages={'min_length': '至少4个字符', 'max_length': '不能多于50个字符', 'required': '标题不能为空'},
-                            widget=forms.TextInput(attrs={'placeholder': '请输入标题（4～50个字符）'}))
-    desc = forms.CharField(min_length=4, max_length=100, required=True,
-                           error_messages={'min_length': '至少4个字符', 'max_length': '不能多于100个字符', 'required': '描述不能为空'},
-                           widget=forms.Textarea(attrs={'placeholder': '请输入描述（4～100个字符）'}))
+    title = forms.CharField(min_length=2, max_length=15, required=True,
+                            error_messages={'min_length': '标题至少2个字', 'max_length': '标题不能多于50个字', 'required': '标题不能为空'},
+                            widget=forms.TextInput(attrs={'placeholder': '请输入标题（2～15个字）'}))
+    desc = forms.CharField(min_length=2, max_length=50, required=True,
+                           error_messages={'min_length': '描述至少2个字', 'max_length': '描述不能多于100个字', 'required': '描述不能为空'},
+                           widget=forms.Textarea(attrs={'placeholder': '请输入描述（2～50个字）'}))
     cover = forms.ImageField(required=True, error_messages={'required': '封面不能为空'},
                              widget=forms.FileInput(attrs={'class': 'n'}))
     status = forms.CharField(min_length=1, max_length=1, required=False, widget=forms.HiddenInput())
@@ -56,14 +56,14 @@ class VideoEditForm(forms.ModelForm):
 
 
 class UserAddForm(forms.ModelForm):
-    username = forms.CharField(min_length=4, max_length=30,
-                               error_messages={'min_length': '用户名不少于4个字符', 'max_length': '用户名不能多于30个字符',
+    username = forms.CharField(min_length=2, max_length=15,
+                               error_messages={'min_length': '用户名至少2个字', 'max_length': '用户名不能多于15个字',
                                                'required': '用户名不能为空', },
-                               widget=forms.TextInput(attrs={'placeholder': '请输入用户名'}))
-    password = forms.CharField(min_length=8, max_length=30,
-                               error_messages={'min_length': '密码不少于8个字符', 'max_length': '密码不能多于30个字符',
+                               widget=forms.TextInput(attrs={'placeholder': '请输入用户名（2～15个字）'}))
+    password = forms.CharField(min_length=8, max_length=16,
+                               error_messages={'min_length': '密码至少8位', 'max_length': '密码不能多于16位',
                                                'required': '密码不能为空', },
-                               widget=forms.PasswordInput(attrs={'placeholder': '请输入密码'}))
+                               widget=forms.PasswordInput(attrs={'placeholder': '请输入密码（8～16位）'}))
 
     class Meta:
         model = User
@@ -76,10 +76,10 @@ def username_validate(value):
 
 
 class UserEditForm(forms.ModelForm):
-    username = forms.CharField(min_length=4, max_length=30, required=True, validators=[username_validate],
-                               error_messages={'min_length': '至少4个字符', 'max_length': '不能多于30个字符',
+    username = forms.CharField(min_length=2, max_length=15, required=True, validators=[username_validate],
+                               error_messages={'min_length': '用户名至少2个字', 'max_length': '用户名不能多于15个字',
                                                'required': '用户名不能为空'},
-                               widget=forms.TextInput(attrs={'placeholder': '请输入用户名'}))
+                               widget=forms.TextInput(attrs={'placeholder': '请输入用户名（2～15个字）'}))
 
     class Meta:
         model = User
@@ -87,9 +87,9 @@ class UserEditForm(forms.ModelForm):
 
 
 class ClassificationAddForm(forms.ModelForm):
-    title = forms.CharField(min_length=2, max_length=30, required=True,
-                            error_messages={'min_length': '至少2个字符', 'max_length': '不能多于30个字符', 'required': '不能为空'},
-                            widget=forms.TextInput(attrs={'placeholder': '请输入分类名称'}))
+    title = forms.CharField(min_length=2, max_length=6, required=True,
+                            error_messages={'min_length': '至少2个字', 'max_length': '不能多于6个字', 'required': '不能为空'},
+                            widget=forms.TextInput(attrs={'placeholder': '请输入分类名称（2～6）个字'}))
 
     class Meta:
         model = Classification
@@ -97,9 +97,9 @@ class ClassificationAddForm(forms.ModelForm):
 
 
 class ClassificationEditForm(forms.ModelForm):
-    title = forms.CharField(min_length=2, max_length=30, required=True,
-                            error_messages={'min_length': '至少2个字符', 'max_length': '不能多于30个字符', 'required': '不能为空'},
-                            widget=forms.TextInput(attrs={'placeholder': '请输入分类名称'}))
+    title = forms.CharField(min_length=2, max_length=6, required=True,
+                            error_messages={'min_length': '至少2个字', 'max_length': '不能多于6个字', 'required': '不能为空'},
+                            widget=forms.TextInput(attrs={'placeholder': '请输入分类名称（2～6）个字'}))
 
     class Meta:
         model = Classification

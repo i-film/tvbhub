@@ -18,7 +18,7 @@ class CommentQuerySet(models.query.QuerySet):
 class Comment(models.Model):
     list_display = ('content', 'timestamp',)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    username = models.CharField(max_length=30, blank=True, null=True)
+    username = models.CharField(max_length=15, blank=True, null=True)
     avatar = models.CharField(max_length=100, blank=True, null=True)
     video = models.ForeignKey(Video, on_delete=models.CASCADE)
     content = models.CharField(max_length=200)
