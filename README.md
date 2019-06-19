@@ -173,6 +173,9 @@ Centos7 中使用 `conda install mysqlcient`
 
 `cd youtube`
 
+安装项目依赖  
+`pip install -r requiredments.txt`
+
 导入表结构  
 `python manage.py makemigrations users`
 
