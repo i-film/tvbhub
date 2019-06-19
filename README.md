@@ -215,3 +215,6 @@ Centos7 中使用 `conda install mysqlcient`
 ### 注意
 可能要改变 settings.py 里面关于 ALLOWED_HOSTS(27行) 和 DB(85行) 地址  
 在本地开发要改一下126~130行
+
+如果要更改上传视频的大小限制需要在 settings 的143行和  
+myadmin/video_upload.js 的 39, 47, 60 行更改
