@@ -142,7 +142,7 @@ Centos7 中使用 `conda install mysqlcient`
 >libicuuc.so.58 => not found  
 >libicudata.so.58 => not found  
 
-于是就把 anaconda3/lib 下相应的包复制到/lib64下去（64bit 机器，如果时32bit 机器则软链到/lib下）
+于是就把 anaconda3/lib 下相应的包复制到/lib64下去（64bit 机器，如果时32bit 机器则软链到/lib下）  
 `sudo cp ~/anaconda3/lib/libicui18n.so.58 /lib64/`  
 
 `sudo cp ~/anaconda3/lib/libicuuc.so.58 /lib64/`  
