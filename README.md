@@ -85,7 +85,7 @@ Centos7 中使用 `conda install mysqlcient`
 
 写入下面内容  
 >[nginx-stable]  
->name=nginx stable repo
+>name=nginx stable repo  
 >baseurl=http://nginx.org/packages/centos/$releasever/$basearch/  
 >gpgcheck=1  
 >enabled=1  
