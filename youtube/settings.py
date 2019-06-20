@@ -149,4 +149,4 @@ EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'passlinemovie@foxmail.com'
-EMAIL_HOST_PASSWORD = 'fwbmthnwxehxebcd'
+EMAIL_HOST_PASSWORD = 'ysbqbizqdirsdidi'
