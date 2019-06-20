@@ -24,7 +24,7 @@ SECRET_KEY = '43=kmvtk-yva0_idtg**v8k0so474pt6f($ksgef&1v6d5=ynf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.111']
+ALLOWED_HOSTS = ['212.129.147.213']
 
 # Application definition
 
@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'youtube',
         'USER': 'yc',
         'PASSWORD': 'wai25789',
-        'HOST': '192.168.1.111',
+        'HOST': '212.129.147.213',
         'PORT': '3306',
     }
 }
@@ -139,8 +139,8 @@ LOGIN_REDIRECT_URL = '/videos/index'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'upload').replace('\\', '/')
 MEDIA_URL = '/upload/'
 
-# 上传视频最大尺寸 10GB
-CHUNKED_UPLOAD_MAX_BYTES = 10000000000
+# 上传视频最大尺寸 100M
+CHUNKED_UPLOAD_MAX_BYTES = 100000000
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
@@ -149,4 +149,4 @@ EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'passlinemovie@foxmail.com'
-EMAIL_HOST_PASSWORD = 'fwbmthnwxehxebcd'
+EMAIL_HOST_PASSWORD = 'ysbqbizqdirsdidi'
