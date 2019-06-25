@@ -1,9 +1,19 @@
 # YouTube
 
 ## CentOS 7
+#### 添加yc普通用户
+`useradd yc`  
+`vi /etc/sudoers`  
+更改密码  
+`password yc`
+添加如下内容  
+>yc      ALL=(ALL)       ALL  
+
+
 #### 关闭笔记本盖不休眠
 `sudo vi /etc/systemd/logind.conf`  
 将 HandleLidSwitch 的注释去掉并将值改为 lock
+
 
 #### 阿里云镜像
 `sudo mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup`
