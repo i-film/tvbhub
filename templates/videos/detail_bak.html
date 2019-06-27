@@ -8,9 +8,9 @@
 {% block content %}
 <div class="ui unstackable two column grid">
     <div class=" ten wide column">
-        <div>
-            {{ video.bili|safe }}
-        </div>
+        <video autoplay="autoplay" class="video" controls="controls" controlslist="nodownload" disablePictureInPicture>
+            <source src="{{video.file.url}}" type="video/mp4">
+        </video>
         <div class="video-info">
             <div class="video-title">{{ video.title }}</div>
             <div class="video-view-count">{{ video.view_count }}次观看</div>

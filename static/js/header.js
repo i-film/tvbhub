@@ -21,7 +21,7 @@ $(function(){
     });
 
     var explorerName = getExploreName();
-    if(explorerName.startsWith("Safari")||explorerName.startsWith("IE")){
+    if(explorerName.startsWith("IE")){
         alert("请使用FireFox浏览器访问该网站");
     }
 
