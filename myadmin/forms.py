@@ -30,8 +30,8 @@ class VideoPublishForm(forms.ModelForm):
     desc = forms.CharField(min_length=2, max_length=50, required=True,
                            error_messages={'min_length': '描述至少2个字', 'max_length': '描述不能多于50个字', 'required': '描述不能为空'},
                            widget=forms.Textarea(attrs={'placeholder': '请输入描述（2～50个字）'}))
-    bili = forms.CharField(max_length=256, required=True,
-                           error_messages={'max_length': 'B站链接256个字符', 'required': '不能为空'},
+    bili = forms.CharField(max_length=300, required=True,
+                           error_messages={'max_length': 'B站链接最多300个字符', 'required': 'B站链接不能为空'},
                            widget=forms.Textarea(attrs={'placeholder': '请输入B站链接'}))
     cover = forms.ImageField(required=True, error_messages={'required': '封面不能为空'},
                              widget=forms.FileInput(attrs={'class': 'n'}))
@@ -49,8 +49,8 @@ class VideoEditForm(forms.ModelForm):
     desc = forms.CharField(min_length=2, max_length=50, required=True,
                            error_messages={'min_length': '描述至少2个字', 'max_length': '描述不能多于100个字', 'required': '描述不能为空'},
                            widget=forms.Textarea(attrs={'placeholder': '请输入描述（2～50个字）'}))
-    bili = forms.CharField(max_length=256, required=True,
-                           error_messages={'max_length': 'B站链接256个字符', 'required': '不能为空'},
+    bili = forms.CharField(max_length=300, required=True,
+                           error_messages={'max_length': 'B站链接最多300个字符', 'required': 'B站链接不能为空'},
                            widget=forms.Textarea(attrs={'placeholder': '请输入B站链接'}))
     cover = forms.ImageField(required=True, error_messages={'required': '封面不能为空'},
                              widget=forms.FileInput(attrs={'class': 'n'}))
