@@ -58,10 +58,10 @@ class Video(models.Model):
         ('0', '发布中'),
         ('1', '未发布'),
     )
-    title = models.CharField(max_length=15, blank=True, null=True)
-    desc = models.CharField(max_length=50, blank=True, null=True)
+    title = models.CharField(max_length=30, blank=True, null=True)
     classification = models.ForeignKey(Classification, on_delete=models.CASCADE, null=True)
     file = models.FileField(max_length=256)
+    bili = models.FileField(max_length=300)
     cover = models.ImageField(upload_to='cover/', blank=True, null=True)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, blank=True, null=True)
     view_count = models.IntegerField(default=0, blank=True)

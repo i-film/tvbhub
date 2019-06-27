@@ -199,3 +199,21 @@ body {
     line-height:34px;
     color:#000;
 }
+
+/* 不要改变下面的顺序 */
+
+/*Chrome Safari*/
+@media screen and (-webkit-min-device-pixel-ratio:0){
+    .bilibili{
+        width: 100%;
+        height: 60%;
+    }
+}
+
+/*FireFox*/
+@-moz-document url-prefix(){
+    .bilibili{
+        width: 100%;
+        height: 120%;
+    }
+}
