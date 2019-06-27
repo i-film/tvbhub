@@ -24,41 +24,35 @@ class UserLoginForm(AuthenticationForm):
 
 
 class VideoPublishForm(forms.ModelForm):
-    title = forms.CharField(min_length=2, max_length=15, required=True,
-                            error_messages={'min_length': '标题至少2个字', 'max_length': '标题不能多于15个字', 'required': '标题不能为空'},
-                            widget=forms.TextInput(attrs={'placeholder': '请输入标题（2～15个字）'}))
-    desc = forms.CharField(min_length=2, max_length=50, required=True,
-                           error_messages={'min_length': '描述至少2个字', 'max_length': '描述不能多于50个字', 'required': '描述不能为空'},
-                           widget=forms.Textarea(attrs={'placeholder': '请输入描述（2～50个字）'}))
+    title = forms.CharField(min_length=1, max_length=30, required=True,
+                            error_messages={'min_length': '标题至少1个字', 'max_length': '标题不能多于30个字', 'required': '标题不能为空'},
+                            widget=forms.TextInput(attrs={'placeholder': '请输入标题（1～30个字）'}))
     bili = forms.CharField(max_length=300, required=True,
                            error_messages={'max_length': 'B站链接最多300个字符', 'required': 'B站链接不能为空'},
-                           widget=forms.Textarea(attrs={'placeholder': '请输入B站链接'}))
+                           widget=forms.Textarea(attrs={'placeholder': '在 iframe 标签里加入 class="bilibili"'}))
     cover = forms.ImageField(required=True, error_messages={'required': '封面不能为空'},
                              widget=forms.FileInput(attrs={'class': 'n'}))
     status = forms.CharField(min_length=1, max_length=1, required=False, widget=forms.HiddenInput(attrs={'value': '0'}))
 
     class Meta:
         model = Video
-        fields = ['title', 'desc', 'status', 'cover', 'classification', 'bili', ]
+        fields = ['title', 'status', 'cover', 'classification', 'bili', ]
 
 
 class VideoEditForm(forms.ModelForm):
-    title = forms.CharField(min_length=2, max_length=15, required=True,
-                            error_messages={'min_length': '标题至少2个字', 'max_length': '标题不能多于50个字', 'required': '标题不能为空'},
-                            widget=forms.TextInput(attrs={'placeholder': '请输入标题（2～15个字）'}))
-    desc = forms.CharField(min_length=2, max_length=50, required=True,
-                           error_messages={'min_length': '描述至少2个字', 'max_length': '描述不能多于100个字', 'required': '描述不能为空'},
-                           widget=forms.Textarea(attrs={'placeholder': '请输入描述（2～50个字）'}))
+    title = forms.CharField(min_length=1, max_length=30, required=True,
+                            error_messages={'min_length': '标题至少1个字', 'max_length': '标题不能多于30个字', 'required': '标题不能为空'},
+                            widget=forms.TextInput(attrs={'placeholder': '请输入标题（1～30个字）'}))
     bili = forms.CharField(max_length=300, required=True,
                            error_messages={'max_length': 'B站链接最多300个字符', 'required': 'B站链接不能为空'},
-                           widget=forms.Textarea(attrs={'placeholder': '请输入B站链接'}))
+                           widget=forms.Textarea(attrs={'placeholder': '在 iframe 标签里加入 class="bilibili"'}))
     cover = forms.ImageField(required=True, error_messages={'required': '封面不能为空'},
                              widget=forms.FileInput(attrs={'class': 'n'}))
     status = forms.CharField(min_length=1, max_length=1, required=False, widget=forms.HiddenInput())
 
     class Meta:
         model = Video
-        fields = ['title', 'desc', 'status', 'cover', 'classification', 'bili', ]
+        fields = ['title', 'status', 'cover', 'classification', 'bili', ]
 
 
 class UserAddForm(forms.ModelForm):
