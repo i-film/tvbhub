@@ -52,9 +52,9 @@ class UserLoginForm(AuthenticationForm):
 class ChangePwdForm(PasswordChangeForm):
     old_password = forms.CharField(error_messages={'required': '现在的密码不能为空', },
                                    widget=forms.PasswordInput(attrs={'placeholder': '请输入现在的密码（8～16位）'}))
-    new_password1 = forms.CharField(error_messages={'required': '不能为空', },
+    new_password1 = forms.CharField(error_messages={'required': '请输入新密码', },
                                     widget=forms.PasswordInput(attrs={'placeholder': '请输入新密码（8～16位）'}))
-    new_password2 = forms.CharField(error_messages={'required': '不能为空', },
+    new_password2 = forms.CharField(error_messages={'required': '请确认新密码', },
                                     widget=forms.PasswordInput(attrs={'placeholder': '请输入确认密码（8～16位）'}))
 
 

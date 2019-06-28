@@ -11,12 +11,12 @@
     <div class="item">
         <div class="ui tiny image">
             {% thumbnail item.cover "300x200" crop="center" as im %}
-            <img class="ui image" src="{{ im.url }}">
+            <a href="{% url 'videos:detail' item.pk %}"><img class="ui image" src="{{ im.url }}"></a>
             {% empty %}
             {% endthumbnail %}
         </div>
         <div class="middle aligned content">
-            <a class="header" href="{% url 'video:detail' item.pk %}">{{ item.title }}</a>
+            <a class="header" href="{% url 'videos:detail' item.pk %}">{{ item.title }}</a>
         </div>
     </div>
     {% empty %}
