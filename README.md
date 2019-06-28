@@ -15,10 +15,34 @@
 将 HandleLidSwitch 的注释去掉并将值改为 lock
 
 
-#### 阿里云镜像
+#### 腾讯云镜像
 `sudo mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup`
 
-`sudo curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo`
+`sudo curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.cloud.tencent.com/repo/centos7_base.repo`
+
+`sudo yum clean all`  
+
+`sudo yum makecache`
+
+`vi ~/.pip/pip.conf`
+>[global]  
+index-url = https://mirrors.cloud.tencent.com/pypi/simple  
+trusted-host = mirrors.cloud.tencent.com  
+
+`sudo vi /etc/yum.repo.d/MariaDB.repo`
+>[mariadb]  
+name = MariaDB  
+baseurl = http://mirrors.cloud.tencent.com/mariadb/yum/10.4/centos7-amd64  
+gpgkey=https://mirrors.cloud.tencent.com/mariadb/yum/RPM-GPG-KEY-MariaDB  
+gpgcheck=1  
+
+
+#### Anaconda 清华大学镜像
+Anaconda 安装包可以到 https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/ 下载  
+Miniconda 安装包可以到 https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/ 下载  
+`conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/`  
+`conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/`  
+`conda config --set show_channel_urls yes`  
 
 
 #### 设置静态IP
