@@ -131,6 +131,7 @@ body {
 .video-view-count{
     margin-top: 16px;
     color: #888888;
+    font-size: small;
 }
 
 .video-view-operation{
@@ -198,6 +199,14 @@ body {
 .v-header-avatar{
     line-height:34px;
     color:#000;
+}
+
+.float-left{
+    float:left;
+}
+
+.float-right{
+    float:right;
 }
 
 /* 不要改变下面的顺序 */

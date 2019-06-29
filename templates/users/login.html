@@ -39,9 +39,8 @@
             {% include "base/form_errors.html" %}
 
         </form>
-
-        <div class="ui message">还没有账号？<a href="{% url 'users:signup' %}">注册</a></div>
-        <div class="ui message"><a href="{% url 'users:reset_password' %}">忘记密码</a></div>
+            <span class="float-left"><a href="{% url 'users:signup' %}">注册账号</a></span>
+            <span class="float-right"><a href="{% url 'users:reset_password' %}">忘记密码</a></span>
     </div>
 </div>
 </body>
