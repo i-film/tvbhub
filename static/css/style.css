@@ -213,7 +213,7 @@ body {
 
 /*Chrome Safari*/
 @media screen and (-webkit-min-device-pixel-ratio:0){
-    .bilibili{
+    .bili{
         width: 100%;
         height: 60%;
     }
@@ -221,7 +221,7 @@ body {
 
 /*FireFox*/
 @-moz-document url-prefix(){
-    .bilibili{
+    .bili{
         width: 100%;
         height: 120%;
     }
