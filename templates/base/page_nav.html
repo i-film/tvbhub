@@ -9,8 +9,7 @@
         {% if page_obj.number == i %}
         <a class="ui red circular label">{{ i }}</a>
         {% else %}
-        <a class="ui circular label" href="?page={{ i }}{% if c %}&c={{c}}{% endif %}{% if q %}&q={{q}}{% endif %}">{{ i
-            }}</a>
+        <a class="ui circular label" href="?page={{ i }}{% if c %}&c={{c}}{% endif %}{% if q %}&q={{q}}{% endif %}">{{ i }}</a>
         {% endif %}
         {% endfor %}
         {% if page_obj.has_next %}
