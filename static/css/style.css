@@ -223,6 +223,6 @@ body {
 @-moz-document url-prefix(){
     .bili{
         width: 100%;
-        height: 120%;
+        height: 75%;
     }
 }
