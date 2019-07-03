@@ -24,7 +24,7 @@ SECRET_KEY = '43=kmvtk-yva0_idtg**v8k0so474pt6f($ksgef&1v6d5=ynf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['212.129.147.213']
+ALLOWED_HOSTS = ['www.ace-film.com']
 
 # Application definition
 
@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'youtube',
         'USER': 'yc',
         'PASSWORD': 'wai25789',
-        'HOST': '212.129.147.213',
+        'HOST': '159.138.130.245',
         'PORT': '3306',
     }
 }
