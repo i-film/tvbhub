@@ -49,8 +49,8 @@ $("#chunked_upload").fileupload({
         return;
     }
 
-    if(!type.startsWith("video/")){
-        alert('视频格式不正确');
+    if(!type.startsWith("image/")){
+        alert('图片格式不正确');
         return;
     }
 

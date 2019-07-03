@@ -45,21 +45,12 @@
                 <div class="field">
                     <label>视频封面</label>
                     {% if video.cover %}
-                    {% thumbnail video.cover "300x200" crop="center" as im %}
+                    {% thumbnail video.cover "300x400" crop="center" as im %}
                       <img class="ui small image" src="{{ im.url }}">
                     {% empty %}
                     {% endthumbnail %}
                     {% endif %}
-
-                    <div class="v-form-field">
-                        <label class="ui large green label" for="id_cover">
-                            <i class="upload icon"></i> 上传封面
-                             {{form.cover}}
-                        </label>
-                        <span id="file_is_choose" class="n">文件已选择</span>
-                    </div>
                 </div>
-
 
                 <button class="ui primary button" type="submit">发布</button>
 
@@ -86,12 +77,7 @@ $(function(){
 
     $('.ui .dropdown').dropdown();
 
-    $("#id_cover").change(function(){
-        $("#file_is_choose").show()
-    });
-
 });
 </script>
-
 
 {% endblock javascript %}
