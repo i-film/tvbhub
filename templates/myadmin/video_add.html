@@ -5,14 +5,14 @@
 
 <div class="ui grid">
     <div class="row">
-        <h3>添加视频</h3>
+        <h3>添加电影</h3>
     </div>
     <div class="ui divider"></div>
     <div class="row">
         <div class="v-form-wrap">
             {% csrf_token %}
             <label id="progress_label" class="ui large blue label" for="chunked_upload">
-                <i class="upload icon"></i> 上传视频
+                <i class="upload icon"></i> 上传封面
                 <input id="chunked_upload" type="file" name="the_file" hidden>
             </label>
             <div id="progress_layout" class="n">

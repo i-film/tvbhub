@@ -27,8 +27,6 @@ class VideoPublishForm(forms.ModelForm):
     title = forms.CharField(min_length=1, max_length=30, required=True,
                             error_messages={'min_length': '标题至少1个字', 'max_length': '标题不能多于30个字', 'required': '标题不能为空'},
                             widget=forms.TextInput(attrs={'placeholder': '请输入标题（1～30个字）'}))
-    cover = forms.ImageField(required=True, error_messages={'required': '封面不能为空'},
-                             widget=forms.FileInput(attrs={'class': 'n'}))
     status = forms.CharField(min_length=1, max_length=1, required=False, widget=forms.HiddenInput(attrs={'value': '0'}))
     bili = forms.CharField(max_length=300, required=True,
                            error_messages={'max_length': 'B站链接最多300个字符', 'required': 'B站链接不能为空'},
@@ -39,15 +37,13 @@ class VideoPublishForm(forms.ModelForm):
 
     class Meta:
         model = Video
-        fields = ['title', 'status', 'cover', 'classification', 'bili', 'download', ]
+        fields = ['title', 'status', 'classification', 'bili', 'download', ]
 
 
 class VideoEditForm(forms.ModelForm):
     title = forms.CharField(min_length=1, max_length=30, required=True,
                             error_messages={'min_length': '标题至少1个字', 'max_length': '标题不能多于30个字', 'required': '标题不能为空'},
                             widget=forms.TextInput(attrs={'placeholder': '请输入标题（1～30个字）'}))
-    cover = forms.ImageField(required=True, error_messages={'required': '封面不能为空'},
-                             widget=forms.FileInput(attrs={'class': 'n'}))
     status = forms.CharField(min_length=1, max_length=1, required=False, widget=forms.HiddenInput())
     bili = forms.CharField(max_length=300, required=True,
                            error_messages={'max_length': 'B站链接最多300个字符', 'required': 'B站链接不能为空'},
@@ -58,7 +54,7 @@ class VideoEditForm(forms.ModelForm):
 
     class Meta:
         model = Video
-        fields = ['title', 'status', 'cover', 'classification', 'bili', 'download', ]
+        fields = ['title', 'status', 'classification', 'bili', 'download', ]
 
 
 class UserAddForm(forms.ModelForm):

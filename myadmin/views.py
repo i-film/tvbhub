@@ -88,7 +88,7 @@ class MyChunkedUploadCompleteView(ChunkedUploadCompleteView):
         pass
 
     def get_response_data(self, chunked_upload, request):
-        video = Video.objects.create(file=chunked_upload.file)
+        video = Video.objects.create(cover=chunked_upload.file)
         return {'code': 0, 'video_id': video.id, 'msg': 'success'}
 
 

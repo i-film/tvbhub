@@ -139,8 +139,8 @@ LOGIN_REDIRECT_URL = '/videos/index'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'upload').replace('\\', '/')
 MEDIA_URL = '/upload/'
 
-# 上传视频最大尺寸 100M
-CHUNKED_UPLOAD_MAX_BYTES = 100000000
+# 上传视频最大尺寸 1M
+CHUNKED_UPLOAD_MAX_BYTES = 1000000
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
