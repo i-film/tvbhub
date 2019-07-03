@@ -30,16 +30,13 @@ class VideoPublishForm(forms.ModelForm):
     cover = forms.ImageField(required=True, error_messages={'required': '封面不能为空'},
                              widget=forms.FileInput(attrs={'class': 'n'}))
     status = forms.CharField(min_length=1, max_length=1, required=False, widget=forms.HiddenInput(attrs={'value': '0'}))
-    bili = forms.CharField(max_length=300, required=True,
-                           error_messages={'max_length': 'B站链接最多300个字符', 'required': 'B站链接不能为空'},
-                           widget=forms.Textarea(attrs={'placeholder': '在 iframe 标签里加入 class="bili"'}))
-    download = forms.CharField(max_length=300, required=True,
-                               error_messages={'max_length': '下载链接最多300个字符', 'required': '下载链接不能为空'},
-                               widget=forms.Textarea(attrs={'placeholder': '输入其他的网站下载页面链接或者直接迅雷链接'}))
+    desc = forms.CharField(max_length=300, required=True,
+                           error_messages={'max_length': '描述最多300个字', 'required': '描述不能为空'},
+                           widget=forms.Textarea(attrs={'placeholder': '请输入视频描述'}))
 
     class Meta:
         model = Video
-        fields = ['title', 'status', 'cover', 'classification', 'bili', 'download', ]
+        fields = ['title', 'status', 'cover', 'classification', 'desc']
 
 
 class VideoEditForm(forms.ModelForm):
@@ -49,16 +46,13 @@ class VideoEditForm(forms.ModelForm):
     cover = forms.ImageField(required=True, error_messages={'required': '封面不能为空'},
                              widget=forms.FileInput(attrs={'class': 'n'}))
     status = forms.CharField(min_length=1, max_length=1, required=False, widget=forms.HiddenInput())
-    bili = forms.CharField(max_length=300, required=True,
-                           error_messages={'max_length': 'B站链接最多300个字符', 'required': 'B站链接不能为空'},
-                           widget=forms.Textarea(attrs={'placeholder': '在 iframe 标签里加入 class="bili"'}))
-    download = forms.CharField(max_length=300, required=True,
-                               error_messages={'max_length': '下载链接最多300个字符', 'required': '下载链接不能为空'},
-                               widget=forms.Textarea(attrs={'placeholder': '输入其他的网站下载页面链接或者直接迅雷链接'}))
+    desc = forms.CharField(max_length=300, required=True,
+                           error_messages={'max_length': '描述最多300个字', 'required': '描述不能为空'},
+                           widget=forms.Textarea(attrs={'placeholder': '请输入视频描述'}))
 
     class Meta:
         model = Video
-        fields = ['title', 'status', 'cover', 'classification', 'bili', 'download', ]
+        fields = ['title', 'status', 'cover', 'classification', 'desc']
 
 
 class UserAddForm(forms.ModelForm):

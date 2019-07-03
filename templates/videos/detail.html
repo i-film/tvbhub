@@ -8,19 +8,17 @@
 {% block content %}
 <div class="ui unstackable two column grid">
     <div class=" ten wide column">
-        <div>
-            {{ video.bili|safe }}
-        </div>
+        <video autoplay="autoplay" class="video" controls="controls" controlslist="nodownload" disablePictureInPicture>
+            <source src="{{video.file.url}}" type="video/mp4">
+        </video>
         <div class="video-info">
-            <div>
-                <span class="video-title">{{ video.title }}</span>
-                <span class="video-view-count">{{ video.view_count }}次播放</span>
-                <span><button><a target="_blank" href="{{ video.download }}">迅雷or电驴下载</a></button></span>
-                <span class="float-right">
+            <span class="video-title">{{ video.title }}</span>
+            <span class="video-view-count">{{ video.view_count }}次观看</span>
+            <span class="float-right">
                     <i class="like {%  user_liked_class video user %} icon cursor" id="like" video-id="{{ video.id }}"></i>
                     <span id="like-count">{{ video.count_likers }}</span>
-                </span>
-            </div>
+            </span>
+            <div class="video-view-operation">{{video.desc}}</div>
             <div class="ui divider"></div>
         </div>
 
