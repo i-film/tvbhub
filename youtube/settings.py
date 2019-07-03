@@ -148,5 +148,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'minitube@foxmail.com'
-EMAIL_HOST_PASSWORD = 'fecvlclrkmniecah'
+EMAIL_HOST_USER = 'ace-film@foxmail.com'
+EMAIL_HOST_PASSWORD = 'zixymxwjifzxecec'
