@@ -162,7 +162,7 @@ def send_email(token, email):
     if len(ALLOWED_HOSTS) > 0:
         host = ALLOWED_HOSTS[0]
     html_link = 'http://{0}/users/reset_password_done/?token={1}'.format(host, token)
-    subject = '王牌电影用户密码重设'
+    subject = 'Ace-Film用户密码重设'
     message = '如果这不是您本人的操作，请忽略此邮件'
     html_message = '<p><a href="{}">点我</a>进行密码重设。为了您的账户安全，请勿向把链接发给他人！</p>'.format(html_link)
     send_mail(subject, message, EMAIL_HOST_USER, [email], html_message=html_message)
