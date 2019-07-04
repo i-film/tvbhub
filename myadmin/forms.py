@@ -58,10 +58,10 @@ class VideoEditForm(forms.ModelForm):
 
 
 class UserAddForm(forms.ModelForm):
-    username = forms.CharField(min_length=2, max_length=15,
-                               error_messages={'min_length': '用户名至少2个字', 'max_length': '用户名不能多于15个字',
+    username = forms.CharField(min_length=2, max_length=30,
+                               error_messages={'min_length': '用户名至少2个字', 'max_length': '用户名不能多于30个字',
                                                'required': '用户名不能为空', },
-                               widget=forms.TextInput(attrs={'placeholder': '请输入用户名（2～15个字）'}))
+                               widget=forms.TextInput(attrs={'placeholder': '请输入用户名（2～30个字）'}))
     password = forms.CharField(min_length=8, max_length=16,
                                error_messages={'min_length': '密码至少8位', 'max_length': '密码不能多于16位',
                                                'required': '密码不能为空', },
@@ -78,10 +78,10 @@ def username_validate(value):
 
 
 class UserEditForm(forms.ModelForm):
-    username = forms.CharField(min_length=2, max_length=15, required=True, validators=[username_validate],
-                               error_messages={'min_length': '用户名至少2个字', 'max_length': '用户名不能多于15个字',
+    username = forms.CharField(min_length=2, max_length=30, required=True, validators=[username_validate],
+                               error_messages={'min_length': '用户名至少2个字', 'max_length': '用户名不能多于30个字',
                                                'required': '用户名不能为空'},
-                               widget=forms.TextInput(attrs={'placeholder': '请输入用户名（2～15个字）'}))
+                               widget=forms.TextInput(attrs={'placeholder': '请输入用户名（2～30个字）'}))
 
     class Meta:
         model = User
