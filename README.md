@@ -161,6 +161,18 @@ Centos7 中使用 `conda install mysqlcient`
 `nginx -v`
 
 
+### SSL
+`sudo yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional`  
+`sudo yum install certbot python2-certbot-nginx`  
+如果提示pyOpenSSL版本过低就  
+`wget http://cbs.centos.org/kojifiles/packages/pyOpenSSL/16.2.0/3.el7/noarch/python2-pyOpenSSL-16.2.0-3.el7.noarch.rpm`  
+`sudo rpm -iUvh python2-pyOpenSSL-16.2.0-3.el7.noarch.rpm`  
+生成配置文件  
+`sudo certbot certonly --nginx`  
+自动续期  
+`echo "0 0,12 * * * root python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew" | sudo tee -a /etc/crontab > /dev/null`    
+
+
 ### uwsgi
 >uwsgi: error while loading shared libraries: libicui18n.so.58: cannot open shared object file: No such file or directory
 
