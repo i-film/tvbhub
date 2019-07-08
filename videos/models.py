@@ -99,6 +99,6 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
     删除FileField文件
     """
 
-    if instance.file:
-        if os.path.isfile(instance.file.path):
-            os.remove(instance.file.path)
+    if instance.cover:
+        if os.path.isfile(instance.cover.path):
+            os.remove(instance.cover.path)
