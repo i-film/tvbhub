@@ -17,13 +17,12 @@
     <div class="row">
         <table class="ui unstackable single line striped selectable table">
             <thead>
-            <tr><th>分类ID</th><th>名称</th></th><th>状态</th><th>操作</th></tr>
+            <tr><th>名称</th></th><th>状态</th><th>操作</th></tr>
             </thead>
             <tbody class="video-list">
 
             {% for item in classification_list %}
             <tr classification-id="{{item.id}}">
-                <td> {{item.id}}</td>
                 <td> {{item.title}}</td>
                 <td> {% if item.status %}启用{% else %}未启用{% endif %}</td>
                 <td>
