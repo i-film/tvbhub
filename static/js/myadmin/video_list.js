@@ -3,7 +3,7 @@
 $.getScript("/static/js/csrftoken.js");
 
 // 删除
-$(".video-list").click(function() {
+$(".video-list").on("click", ".video-delete", function () {
   var tr = $(this).closest("tr");
   var video_id = $(tr).attr("video-id");
     $('.ui.tiny.modal.delete')
