@@ -140,7 +140,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'upload').replace('\\', '/')
 MEDIA_URL = '/upload/'
 
 # 上传视频最大尺寸 100M
-CHUNKED_UPLOAD_MAX_BYTES = 100000000
+CHUNKED_UPLOAD_MAX_BYTES = 10000000000
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
