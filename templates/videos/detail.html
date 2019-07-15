@@ -9,13 +9,12 @@
 <div class="ui unstackable two column grid">
     <div class=" ten wide column">
         <div>
-            {{ video.bili|safe }}
+             <iframe class="vip" src="http://jx.618ge.com/?url={{ video.link }}" scrolling="no" border="0" allowfullscreen="true" frameborder="0"></iframe>
         </div>
         <div class="video-info">
             <div>
                 <span class="video-title">{{ video.title }}</span>
                 <span class="video-view-count">{{ video.view_count }}次播放</span>
-                <span><button><a target="_blank" href="{{ video.download }}">迅雷</a></button></span>
                 <span class="float-right">
                     <i class="like {%  user_liked_class video user %} icon cursor" id="like" video-id="{{ video.id }}"></i>
                     <span id="like-count">{{ video.count_likers }}</span>
