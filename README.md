@@ -261,6 +261,17 @@ Centos7 中使用 `conda install mysqlcient`
 `sudo nginx -c /etc/nginx/conf.d/youtube_nginx.conf`
 
 
+### HTTPS 证书
+`sudo yum install epel-release`  
+`sudo yum -y install yum-utils`  
+`sudo yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional`  
+`sudo yum install certbot python2-certbot-nginx`  
+`sudo certbot certonly --nginx`  
+`sudo echo "0 0,12 * * * root python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew" | sudo tee -a /etc/crontab > /dev/null`  
+如果报 pyOpenSSL 错误:  
+`sudo yum install http://cbs.centos.org/kojifiles/packages/pyOpenSSL/16.2.0/3.el7/noarch/python2-pyOpenSSL-16.2.0-3.el7.noarch.rpm`  
+
+
 ### 注意
 可能要改变 settings.py 里面关于 ALLOWED_HOSTS(27行) 和 DB(85行) 地址  
 在本地开发要改一下126~130行
