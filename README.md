@@ -161,16 +161,16 @@ Centos7 中使用 `conda install mysqlcient`
 `nginx -v`
 
 
-### SSL
+### HTTPS 证书
+`sudo yum install epel-release`  
+`sudo yum -y install yum-utils`  
 `sudo yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional`  
 `sudo yum install certbot python2-certbot-nginx`  
-如果提示pyOpenSSL版本过低就  
-`wget http://cbs.centos.org/kojifiles/packages/pyOpenSSL/16.2.0/3.el7/noarch/python2-pyOpenSSL-16.2.0-3.el7.noarch.rpm`  
-`sudo rpm -iUvh python2-pyOpenSSL-16.2.0-3.el7.noarch.rpm`  
-生成配置文件  
 `sudo certbot certonly --nginx`  
-自动续期  
-`echo "0 0,12 * * * root python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew" | sudo tee -a /etc/crontab > /dev/null`    
+`sudo echo "0 0,12 * * * root python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew" | sudo tee -a /etc/crontab > /dev/null`  
+`sudo fuser -k 80/tcp`  
+如果报 pyOpenSSL 错误:  
+`sudo yum install http://cbs.centos.org/kojifiles/packages/pyOpenSSL/16.2.0/3.el7/noarch/python2-pyOpenSSL-16.2.0-3.el7.noarch.rpm`  
 
 
 ### uwsgi
@@ -181,8 +181,8 @@ Centos7 中使用 `conda install mysqlcient`
 查看 uwsgi所在地址，然后使用 LDD 查看缺少的包
 
 `which uwsgi`  
-得到 ~/anaconda3/envs/pys/bin/uwsgi  
-`ldd ~/anaconda3/envs/py3/bin/uwsgi`  
+得到 ~/anaconda3/bin/uwsgi  
+`ldd ~/anaconda3/bin/uwsgi`  
 会看到
 >libicui18n.so.58 => not found  
 >libicuuc.so.58 => not found  
@@ -196,20 +196,20 @@ Centos7 中使用 `conda install mysqlcient`
 `sudo cp ~/anaconda3/lib/libicudata.so.58 /lib64/`  
 
 再使用ldd 测试结果如下  
->~/anaconda3/envs/py3/bin/uwsgi: /lib64/./libstdc++.so.6: version 'CXXABI_1.3.8' not found (required by /lib64/libicui18n.so.58)  
->~/anaconda3/envs/py3/bin/uwsgi: /lib64/./libstdc++.so.6: version 'CXXABI_1.3.9' not found (required by /lib64/libicui18n.so.58)  
->~/anaconda3/envs/py3/bin/uwsgi: /lib64/./libstdc++.so.6: version 'CXXABI_1.3.8' not found (required by ~/libicuuc.so.58)  
->~/anaconda3/envs/py3/bin/uwsgi: /lib64/./libstdc++.so.6: version 'CXXABI_1.3.9' not found (required by /lib64/libicuuc.so.58)  
+>~/anaconda3/bin/uwsgi: /lib64/./libstdc++.so.6: version 'CXXABI_1.3.8' not found (required by /lib64/libicui18n.so.58)  
+>~/anaconda3/bin/uwsgi: /lib64/./libstdc++.so.6: version 'CXXABI_1.3.9' not found (required by /lib64/libicui18n.so.58)  
+>~/anaconda3/bin/uwsgi: /lib64/./libstdc++.so.6: version 'CXXABI_1.3.8' not found (required by ~/libicuuc.so.58)  
+>~/anaconda3/bin/uwsgi: /lib64/./libstdc++.so.6: version 'CXXABI_1.3.9' not found (required by /lib64/libicuuc.so.58)  
 
 `strings /usr/lib64/libstdc++.so.6 | grep CXXABI`  
 确实没有CXXABI_1.3.8  CXXABI_1.3.9 之类的东西，那么就把 anaconda3 下的libstdc++.so.6移到/lib64下面  
-`sudo cp libstdc++.so.6.0.24 /lib64/`  
-版本可能比24高，写笔记时变成了25  
+`sudo cp ~/anaconda3/lib/libstdc++.so.6.0.25 /lib64/`  
+版本可能比25高  
 
 删除/lib64/下原来的libstdc++.so.6符号连接  
-`sudo rm -rf libstdc++.so.6`  
+`sudo rm -rf /lib64/libstdc++.so.6`  
 新建新符号连接  
-`ln -s libstdc++.so.6.0.24 libstdc++.so.6` 
+`sudo ln -s /lib64/libstdc++.so.6.0.25 /lib64/libstdc++.so.6` 
 
 再次执行查看结果符合就了。
 
@@ -259,17 +259,6 @@ Centos7 中使用 `conda install mysqlcient`
 `uwsgi uwsgi.ini` 
 
 `sudo nginx -c /etc/nginx/conf.d/youtube_nginx.conf`
-
-
-### HTTPS 证书
-`sudo yum install epel-release`  
-`sudo yum -y install yum-utils`  
-`sudo yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional`  
-`sudo yum install certbot python2-certbot-nginx`  
-`sudo certbot certonly --nginx`  
-`sudo echo "0 0,12 * * * root python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew" | sudo tee -a /etc/crontab > /dev/null`  
-如果报 pyOpenSSL 错误:  
-`sudo yum install http://cbs.centos.org/kojifiles/packages/pyOpenSSL/16.2.0/3.el7/noarch/python2-pyOpenSSL-16.2.0-3.el7.noarch.rpm`  
 
 
 ### 注意
