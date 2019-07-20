@@ -28,9 +28,9 @@ class VideoPublishForm(forms.ModelForm):
                             error_messages={'min_length': '标题至少1个字', 'max_length': '标题不能多于30个字', 'required': '标题不能为空'},
                             widget=forms.TextInput(attrs={'placeholder': '请输入标题（1～30个字）'}))
     status = forms.CharField(min_length=1, max_length=1, required=False, widget=forms.HiddenInput(attrs={'value': '0'}))
-    link = forms.CharField(max_length=100, required=True,
-                           error_messages={'max_length': '外链接最多100个字符', 'required': '外链接不能为空'},
-                           widget=forms.Textarea(attrs={'placeholder': '腾讯，优酷，爱奇艺等地址'}))
+    link = forms.CharField(max_length=300, required=True,
+                           error_messages={'max_length': '外链接最多300个字符', 'required': '播放地址不能为空'},
+                           widget=forms.Textarea(attrs={'placeholder': '播放地址'}))
 
     class Meta:
         model = Video
@@ -42,9 +42,9 @@ class VideoEditForm(forms.ModelForm):
                             error_messages={'min_length': '标题至少1个字', 'max_length': '标题不能多于30个字', 'required': '标题不能为空'},
                             widget=forms.TextInput(attrs={'placeholder': '请输入标题（1～30个字）'}))
     status = forms.CharField(min_length=1, max_length=1, required=False, widget=forms.HiddenInput())
-    link = forms.CharField(max_length=100, required=True,
-                           error_messages={'max_length': '外链接最多100个字符', 'required': '外链接不能为空'},
-                           widget=forms.Textarea(attrs={'placeholder': '腾讯，优酷，爱奇艺等地址'}))
+    link = forms.CharField(max_length=300, required=True,
+                           error_messages={'max_length': '外链接最多300个字符', 'required': '播放地址不能为空'},
+                           widget=forms.Textarea(attrs={'placeholder': '播放地址'}))
 
     class Meta:
         model = Video
