@@ -5,7 +5,7 @@
 `useradd yc`  
 `vi /etc/sudoers`  
 更改密码  
-`password yc`
+`passwd yc`
 添加如下内容  
 >yc      ALL=(ALL)       ALL  
 
